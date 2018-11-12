@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-    public float pos = 10f;
+    public float pos = 7f;
     public GameObject CameraObj;
     public CapsuleCollider colliderCapsula;
+    
 
- 
     // Use this for initialization
     void Start() {
 
@@ -31,11 +31,20 @@ public class Movement : MonoBehaviour {
 
         if (Input.GetButton("Fire1")) // Agacharse.
         {
-            colliderCapsula.height = 1.0f;
+            colliderCapsula.height = 0.5f;
         }
         else
         {
-            colliderCapsula.height = 1.8f;
+            colliderCapsula.height = 1.5f;
+        }
+
+        if(Input.GetButton("Fire3"))
+        {
+            pos = 13;
+        }
+        else
+        {
+            pos = 7;
         }
     }
 
@@ -43,6 +52,13 @@ public class Movement : MonoBehaviour {
     {
         // Avanzar según la direccion de la cámara donde este mirando.
         GetComponent<Rigidbody>().MovePosition(transform.position + (new Vector3(CameraObj.transform.forward.x, 0f, CameraObj.transform.forward.z) * pos * Input.GetAxis("Vertical") + new Vector3(CameraObj.transform.right.x, 0f, CameraObj.transform.right.z) * pos * Input.GetAxis("Horizontal")) * Time.deltaTime);
+
+        
+
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
+            if (Physics.Raycast(transform.position, fwd, 50))
+                print("Tienes un objeto al frente tuyo!");
 
         
     }

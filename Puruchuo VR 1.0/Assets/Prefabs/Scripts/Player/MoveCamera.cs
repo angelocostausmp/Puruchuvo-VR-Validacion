@@ -27,5 +27,9 @@ public class MoveCamera : MonoBehaviour {
 #if UNITY_EDITOR
         transform.Rotate(Vector3.up * 90 * Time.deltaTime * Input.GetAxis("Mouse X"));
 #endif
+        transform.localPosition = new Vector3(0, 0, 0);
     }
+
+
+   
 }
